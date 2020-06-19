@@ -38,10 +38,10 @@
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>!-->
-      <a-entity position="0 0 0" basic-interactions>
+      <a-entity position="0 0 0">
         <!-- CAMERA -->
         <a-entity id="camera" camera look-controls></a-entity>
-        <a-entity laser-controls="hand: right"></a-entity>
+        <a-entity oculus-go-controls="hand: right; model: true" laser-controls="hand: right"></a-entity>
       </a-entity>
 
       <a-entity light="type:point; castShadow:true;" position="0 5 0"></a-entity>
