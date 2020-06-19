@@ -14,7 +14,14 @@
         var controller = this.el.querySelector('#controller');
 
         controller.addEventListener('triggerdown', function (event) {
-          el.setAttribute('position', {x: 5, y: 5, z: 5});
+          var direction = new THREE.Vector3();
+          camera.getWorldDirection( direction );
+          direction.multiplyScalar(0.1)
+          var pos = el.getAttribute("position");
+          pos.x += direction.x
+          pos.y += direction.y // comment this to get 2D movement
+          pos.z += direction.z
+          el.setAttribute("position", pos);
         });
       }
     });
