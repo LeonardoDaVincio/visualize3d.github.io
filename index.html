@@ -2,10 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello, WebVR! • A-Frame</title>
-    <meta name="description" content="Hello, WebVR! • A-Frame">
+    <title>WebVisu</title>
+    <meta name="description" content="WebVisu">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://rawgit.com/darkwave/aframe-stl-model-component/master/dist/aframe-stl-model-component.min.js"></script>
+    <script>
+    AFRAME.registerComponent('basic-interactions', {
+      init: function() {
+        var el = this.el;
+        var direction = new THREE.Vector3();
+        // TRIGGER BUTTON DOWN
+        el.addEventListener('mousedown', function() {
+          el.getWorldDirection( direction );
+          var pos = el.getAttribute("position")
+          pos.x += direction.x
+          pos.y += direction.y // comment this to get 2D movement
+          pos.z += direction.z
+          el.setAttribute("position", pos);
+        });
+        // TRIGGER BUTTON UP
+        el.addEventListener('mouseup', function() {
+          
+        });
+      }
+    });
+  </script>
   </head>
   <body>
     <a-scene background="color: #293133">
@@ -17,10 +38,12 @@
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>!-->
+      <a-entity position="0 0 4">
+        <!-- CAMERA -->
+        <a-camera></a-camera>
+        <a-entity laser-controls="hand: right"></a-entity>
+      </a-entity>
 
-      <a-entity oculus-go-controls></a-entity>
-      <a-entity laser-controls="hand: right"></a-entity>
-      
       <a-entity light="type:point; castShadow:true;" position="0 5 0"></a-entity>
       <a-entity stl-model="src: #base" scale="0.1 0.1 0.1" rotation="0 0 0" position="-5 -4 -10" material="shader: standard; color: blue; opacity: 0.2; depthTest: false" shadow="receive: true"></a-entity>
       <a-entity stl-model="src: #streamlines" scale="0.1 0.1 0.1" rotation="0 0 0" position="-5 -4 -10" material="shader: standard; color: red;" shadow="receive: false"></a-entity>
