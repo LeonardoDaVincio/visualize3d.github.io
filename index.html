@@ -9,11 +9,12 @@
     <script>
     AFRAME.registerComponent('mover', {
       init: function() {
+        var el = this.el;
         var camera = this.el.querySelector('#camera');
         var controller = this.el.querySelector('#controller');
 
         controller.addEventListener('triggerdown', function (event) {
-          this.el.setAttribute('position', {x: 5, y: 5, z: 5});
+          el.setAttribute('position', {x: 5, y: 5, z: 5});
         });
       }
     });
