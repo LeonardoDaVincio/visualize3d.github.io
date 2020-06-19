@@ -7,22 +7,13 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://rawgit.com/darkwave/aframe-stl-model-component/master/dist/aframe-stl-model-component.min.js"></script>
     <script>
-    AFRAME.registerComponent('basic-interactions', {
+    AFRAME.registerComponent('mover', {
       init: function() {
-        var el = this.el;
-        var direction = new THREE.Vector3();
-        // TRIGGER BUTTON DOWN
-        el.addEventListener('mousedown', function() {
-          el.getWorldDirection( direction );
-          var pos = el.getAttribute("position")
-          pos.x += direction.x
-          pos.y += direction.y // comment this to get 2D movement
-          pos.z += direction.z
-          el.setAttribute("position", pos);
-        });
-        // TRIGGER BUTTON UP
-        el.addEventListener('mouseup', function() {
-          
+        var camera = this.el.querySelector('#camera');
+        var controller = this.el.querySelector('#controller');
+
+        controller.addEventListener('triggerdown', function (event) {
+          this.el.setAttribute('position', {x: 5, y: 5, z: 5});
         });
       }
     });
@@ -38,10 +29,10 @@
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>!-->
-      <a-entity position="0 0 0">
+      <a-entity position="0 0 0" mover>
         <!-- CAMERA -->
         <a-entity id="camera" camera look-controls></a-entity>
-        <a-entity oculus-go-controls="hand: right; model: true" laser-controls="hand: right"></a-entity>
+        <a-entity id="controller" oculus-go-controls="hand: right; model: true" laser-controls="hand: right"></a-entity>
       </a-entity>
 
       <a-entity light="type:point; castShadow:true;" position="0 5 0"></a-entity>
