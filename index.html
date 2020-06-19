@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,25 +7,37 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://rawgit.com/darkwave/aframe-stl-model-component/master/dist/aframe-stl-model-component.min.js"></script>
     <script>
-    AFRAME.registerComponent('mover', {
-      init: function() {
-        var el = this.el;
-        var camera = this.el.querySelector('#camera');
-        var controller = this.el.querySelector('#controller');
+      AFRAME.registerComponent('mover', {
+        init: function() {
+          var el = this.el;
+          var camera = this.el.querySelector('#camera');
+          var controller = this.el.querySelector('#controller');
 
-        controller.addEventListener('triggerdown', function (event) {
-          var direction = new THREE.Vector3();
-          camera.getWorldDirection( direction );
-          direction.multiplyScalar(0.1)
-          var pos = el.getAttribute("position");
-          pos.x += direction.x
-          pos.y += direction.y // comment this to get 2D movement
-          pos.z += direction.z
-          el.setAttribute("position", pos);
+          controller.addEventListener('triggerdown', function (event) {
+            var direction = new THREE.Vector3();
+            camera.getWorldDirection( direction );
+            direction.multiplyScalar(5)
+            var pos = el.getAttribute("position");
+            pos.x += direction.x
+            pos.y += direction.y // comment this to get 2D movement
+            pos.z += direction.z
+            el.setAttribute("position", pos);
+          });
+          
+          window.addEventListener("keydown", (e) => {
+            if (e.code === "KeyR") {
+              var direction = new THREE.Vector3();
+              camera.getWorldDirection( direction );
+              direction.multiplyScalar(5)
+              var pos = el.getAttribute("position");
+              pos.x += direction.x
+              pos.y += direction.y // comment this to get 2D movement
+              pos.z += direction.z
+              el.setAttribute("position", pos);
+            }
+          }
         });
-      }
-    });
-  </script>
+      </script>
   </head>
   <body>
     <a-scene background="color: #293133">
